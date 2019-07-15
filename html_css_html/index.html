@@ -11,28 +11,28 @@
 	<div id="all">
 		<div id="left">
 			<div>
-				<input type="text" name="output" class="box" readonly="readonly">
+				<input type="text" name="output" class="box" readonly="readonly" id="outText">
 			</div>
 			<div>
-				<input type="text" name="input" class="box" autocomplete="off">
+				<input type="text" name="input" class="box" autocomplete="off" id="inText">
 			</div>
 			
 			
 			<div id="leftBtnArea">
 				<button id="finishBtn" class="btn">Finish</button>
-				<input type="button" name="stop" value="Stop" class="btn">
+				<input type="button" name="stop" value="stop" class="btn" id="stopBtn">
 			</div>
 
 		</div>
 		<div id="right">
 			<div>
-				<input type="text" name="time" class="params" placeholder="Min" autocomplete="off">
+				<input type="number" name="time" class="params" placeholder="Min" autocomplete="off" id="timeText">
 			</div>
 			<div>
-				<input type="text" name="numberCount" class="params" placeholder="Count">
+				<input type="number" name="numberCount" class="params" placeholder="Count" id="countText">
 			</div>
 			<div>
-				<input type="text" name="numberExe" class="params" placeholder="Number:">
+				<input type="text" name="numberExe" class="params" placeholder="Number:" id="numberText">
 			</div>
 			<button id="startBtn" class="btn">Start</button>
 		</div>
