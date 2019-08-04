@@ -112,7 +112,7 @@ window.onload = function(){
 		total = countText.value;
 		var numberExe = numberText.value;
 		params = window.setInterval(function(){
-				if(timeExe>=0){
+				if(timeExe>=0 && total > 0){
 					timeText.value = timeExe;
 					timeExe--;
 				}else{
