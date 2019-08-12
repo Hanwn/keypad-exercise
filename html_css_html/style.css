@@ -9,7 +9,12 @@ body{
 	justify-content: center;
 	align-items: center;
 }
-
+#echarts{
+	margin: 0 auto;
+	width: 600px;
+	height: 400px;
+	display: none;
+}
 .box{
 	width: 270px;
 	height: 100px;
