@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>KeyPad Exercise</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<style type="text/css"></style>
+	<script type="text/javascript" src="app.js"></script>
+	<script src="echarts.min.js"></script>
+</head>
+<body>
+	<div id="all">
+		<div id="left">
+			<div>
+				<input type="text" name="output" class="box" readonly="readonly" id="outText">
+			</div>
+			<div>
+				<input type="text" name="input" class="box" autocomplete="off" id="inText">
+			</div>
+			
+			
+			<div id="leftBtnArea">
+				<button id="finishBtn" class="btn">Finish</button>
+				<input type="button" name="stop" value="stop" class="btn" id="stopBtn">
+			</div>
+
+		</div>
+		<div id="right">
+			<div>
+				<input type="number" name="time" class="params" placeholder="Min" autocomplete="off" id="timeText">
+			</div>
+			<div>
+				<input type="number" name="numberCount" class="params" placeholder="Count" id="countText">
+			</div>
+			<div>
+				<input type="text" name="numberExe" class="params" placeholder="Number:" id="numberText">
+			</div>
+			<button id="startBtn" class="btn">Start</button>
+		</div>
+	</div>
+	<div id="echarts" ></div>
+</body>
+</html>
