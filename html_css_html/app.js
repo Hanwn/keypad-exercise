@@ -5,6 +5,8 @@ window.onload = function(){
 	var params;
 	var flag = 0;
 	var numbertext = '';
+	var main = document.getElementById('echarts');
+	var myChart = echarts.init(main);
 
 	var outText = document.getElementById('outText');
 	var inText = document.getElementById('inText');
@@ -40,7 +42,9 @@ window.onload = function(){
 
 	// 计算成绩函数
 	var score = function(){
-		alert("right:" + right + ",------>err:"+err);
+		// alert("right:" + right + ",------>err:"+err);
+		main.style.display = "block";
+		show();
 	}
 	// 时间结束事件
 	var timeFinish = function(){
@@ -59,6 +63,8 @@ window.onload = function(){
 		stopBtn.value == 'stop';
 		window.clearInterval(params);
 		score();
+		right = 0;
+		err = 0;
 	}
 	// 任务结束事件
 	var countFinish = function(){
@@ -92,7 +98,7 @@ window.onload = function(){
 
 	}
 	startBtn.onclick = function(){
-
+		main.style.display = "none";
 		if(numberText.value.length == 0){
 			flag = 1;
 		}else{
@@ -150,6 +156,28 @@ window.onload = function(){
 			}
 		}
 	}
+	//echarts进行可视化
+	var show = function(){
+		 // 指定图表的配置项和数据
+        var option = {
+            title: {
+                text: '本次练习正确率:' + (right/(right + err) * 100).toFixed(2) + "%"
+            },
+            tooltip: {},
+            // legend: {
+            //     data:['销量']
+            // },
+            series: [{
+                name: '正确率',
+                type: 'pie',
+                data: [
+                	{value:right,name:"正确"},
+                	{value:err,name:"错误"}
+                ]
+            }]
+        };
 
-
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+	}
 };
