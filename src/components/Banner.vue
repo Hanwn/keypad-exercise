@@ -1,39 +1,35 @@
 <script setup>
-
-import {selectMod} from "@/stores/mod";
-import {genNumberArray} from "@/stores/genNumber";
-
-let genNumber = genNumberArray()
-
-let selectModObj = selectMod()
-
+import { globalStore } from "@/stores/globalStore";
+import { storeToRefs } from "pinia";
+const globalVal = globalStore();
+const { mode } = storeToRefs(globalVal);
+const parameterArr = [
+  ["10s", "30s", "60s", "90s", "120s"],
+  [10, 20, 50, 100, 200],
+];
 </script>
 
 <template>
+  <button @click="globalVal.ModifyMode('time')">Time Mode</button>
+  <button @click="globalVal.ModifyMode('count')">Count Mode</button>
 
-  <button @click="selectModObj.count2Time()">Time Mode</button>
-  <button @click="selectModObj.time2Count()">Count Mode</button>
-
-  <div v-if="selectModObj.mod.length !== 0">
-    <div v-if="selectModObj.mod === 'time'">
-      <button @click="genNumber.setCnt(10)">10s</button>
-      <button @click="genNumber.setCnt(30)">30s</button>
-      <button @click="genNumber.setCnt(60)">60s</button>
-      <button @click="genNumber.setCnt(90)">90s</button>
-      <button @click="genNumber.setCnt(120)">120s</button>
+  <div v-if="mode.length !== 0">
+    <div v-if="mode === 'time'">
+      <button
+        v-for="row in parameterArr[0]"
+        @click="globalVal.SetCnt(parseInt(row))"
+      >
+        {{ row }}
+      </button>
     </div>
-    <div v-if="selectModObj.mod === 'count'">
-      <button @click="genNumber.setCnt(10)">10</button>
-      <button @click="genNumber.setCnt(20)">20</button>
-      <button @click="genNumber.setCnt(50)">50</button>
-      <button @click="genNumber.setCnt(100)">100</button>
-      <button @click="genNumber.setCnt(200)">200</button>
+    <div v-if="mode === 'count'">
+      <button v-for="row in parameterArr[1]" @click="globalVal.SetCnt(row)">
+        {{ row }}
+      </button>
     </div>
   </div>
 
-<!--  <input type="checkbox">-->
-
+  <!--  <input type="checkbox">-->
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>

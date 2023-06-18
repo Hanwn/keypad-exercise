@@ -1,50 +1,38 @@
 <script setup>
+import { globalStore } from "@/stores/globalStore";
+import { storeToRefs } from "pinia";
+import { watch } from "vue";
+import { _randomInt } from "@/utils/genNumber";
+import { keypadColor } from "@/stores/keypadColor";
+const keypadColorRender = keypadColor();
 
-import {ref, watch} from "vue";
-import {genNumberArray} from "@/stores/genNumber";
-import {keypadColor} from "@/stores/keypadColor";
-import {selectMod} from "@/stores/mod";
+let globalVal = globalStore();
+const { inputValue, targetValue, cannotInput } = storeToRefs(globalVal);
 
-let genNumber = genNumberArray()
-let keypadColors = keypadColor()
-let selectMode = selectMod()
-const inputNumber = ref("")
-
-watch(inputNumber, ()=>{
-  // if (selectMode)
-  if (selectMode.startOrNot) {
-    selectMode.StartEnter()
+watch(inputValue, () => {
+  if (globalVal.AcquireGameStatus() === 0) {
+    globalVal.Start();
   }
-  const inputNumberLen = inputNumber.value.length
-  if (inputNumberLen > 0) {
-    const inputVal = inputNumber.value.charAt(inputNumberLen - 1)
-    const targetVal = genNumber.popIdxChar(inputNumberLen)
-    if (inputVal === targetVal) {
-      keypadColors.SetKeypadColor(inputVal, true)
+  const inputValLen = inputValue.value.length;
+  if (inputValLen > 0) {
+    const inputChar = inputValue.value.charAt(inputValLen - 1);
+    const targetChar = targetValue.value.charAt(inputValLen - 1);
+    if (inputChar === targetChar) {
+      keypadColorRender.SetKeypadColor(inputChar, true);
     } else {
-      keypadColors.SetKeypadColor(inputVal, false)
+      keypadColorRender.SetKeypadColor(inputChar, false);
     }
   }
-  if (inputNumber.value.length >= 6) {
-    inputNumber.value = ""
-    genNumber.refreshShowNumber()
+  if (inputValLen >= 6) {
+    inputValue.value = "";
+    targetValue.value = globalVal.RefreshTarget();
+    globalVal.Reduce();
   }
-})
-
-function focusInputArea() {
-  console.log("xxx")
-}
-
-
+});
 </script>
 
-
 <template>
-
-  <input v-model="genNumber.inputNumber">
-
+  <input v-model="inputValue" v-bind:readonly="cannotInput" />
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

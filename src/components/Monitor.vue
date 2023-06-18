@@ -1,15 +1,13 @@
 <script setup>
+import { globalStore } from "@/stores/globalStore";
+import { storeToRefs } from "pinia";
 
-import {genNumberArray} from "@/stores/genNumber";
-
-let genNumber = genNumberArray()
-
+const globalVal = globalStore();
+const { targetValue } = storeToRefs(globalVal);
 </script>
 
 <template>
-  <input :value="genNumber.targetNumber" readonly="readonly">
+  <input :value="targetValue" readonly="readonly" />
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>
